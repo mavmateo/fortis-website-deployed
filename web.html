@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortis Labs | AI Automation Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --muted-text: #a1a1a1;
+            --border-color: #1f1f1f;
+            --accent-color: #5555ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ─────────────────────────────────────── */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 60px;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.95), rgba(10,10,10,0));
+            backdrop-filter: blur(2px);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .nav-links a:hover { opacity: 1; }
+        .nav-links a:after { content: '+'; font-size: 12px; color: var(--muted-text); }
+
+        .nav-right { display: flex; align-items: center; gap: 25px; }
+
+        .availability {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 13px; color: var(--muted-text);
+        }
+
+        .dot {
+            width: 6px; height: 6px;
+            background: #00e676; border-radius: 50%;
+            box-shadow: 0 0 8px #00e676;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,100% { box-shadow: 0 0 6px #00e676; }
+            50% { box-shadow: 0 0 14px #00e676; }
+        }
+
+        .cta-nav {
+            background: white; color: black;
+            padding: 10px 20px; text-decoration: none;
+            font-size: 14px; font-weight: 500; border-radius: 2px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .cta-nav:hover { background: var(--accent-color); color: white; }
+
+        /* ── HERO ─────────────────────────────────────── */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            position: relative;
+            overflow: hidden;
+            background-image:
+                linear-gradient(to right, rgba(10,10,10,1) 35%, rgba(10,10,10,0.4) 80%),
+                url('https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center right;
+        }
+
+        /* subtle grid overlay */
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(85,85,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(85,85,255,0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        .hero-content { max-width: 800px; z-index: 5; }
+
+        .sub-tag {
+            font-size: 11px; letter-spacing: 2px;
+            color: var(--accent-color); text-transform: uppercase;
+            margin-bottom: 25px; display: block; font-weight: 600;
+        }
+
+        h1 {
+            font-size: 64px; font-weight: 500;
+            line-height: 1.08; margin-bottom: 40px; letter-spacing: -1.5px;
+        }
+
+        .partner-row {
+            display: flex; align-items: center;
+            gap: 12px; margin-bottom: 20px;
+            font-size: 13px; font-weight: 600;
+        }
+
+        .description {
+            max-width: 460px; font-size: 15px;
+            color: var(--muted-text); margin-bottom: 35px; line-height: 1.7;
+        }
+
+        .hero-ctas { display: flex; gap: 16px; align-items: center; }
+
+        .cta-main {
+            display: inline-flex; align-items: center;
+            background: white; color: black;
+            padding: 13px 24px; text-decoration: none;
+            font-weight: 500; font-size: 15px; gap: 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .cta-main:hover { background: var(--accent-color); color: white; }
+        .cta-main .arrow {
+            background: #333; color: white;
+            padding: 2px 8px; font-size: 12px;
+            transition: background 0.2s;
+        }
+        .cta-main:hover .arrow { background: rgba(255,255,255,0.2); }
+
+        .cta-secondary {
+            font-size: 14px; color: var(--muted-text);
+            text-decoration: none; border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+        }
+        .cta-secondary:hover { color: white; border-color: white; }
+
+        /* ── TRUST ─────────────────────────────────────── */
+        .trust-section { border-top: 1px solid var(--border-color); padding-top: 30px; }
+
+        .trust-label {
+            text-align: center; font-size: 11px;
+            color: var(--muted-text); letter-spacing: 1.5px;
+            margin-bottom: 40px; text-transform: uppercase;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .grid-item {
+            padding: 50px; display: flex;
+            justify-content: center; align-items: center;
+            border-right: 1px solid var(--border-color);
+            transition: background 0.3s;
+        }
+        .grid-item:last-child { border-right: none; }
+        .grid-item:hover { background: #111; }
+
+        .client-logo { font-size: 20px; font-weight: 700; opacity: 0.5; letter-spacing: 2px; transition: opacity 0.3s; }
+        .grid-item:hover .client-logo { opacity: 1; }
+
+        /* ── SHARED SECTION STYLES ─────────────────────── */
+        section { padding: 120px 60px; }
+        section + section { border-top: 1px solid var(--border-color); }
+
+        .section-label {
+            font-size: 11px; letter-spacing: 2px;
+            color: var(--accent-color); text-transform: uppercase;
+            font-weight: 600; display: block; margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 48px; font-weight: 400;
+            letter-spacing: -1px; line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 16px; color: var(--muted-text);
+            max-width: 520px; line-height: 1.7; margin-bottom: 60px;
+        }
+
+        /* ── SERVICES ─────────────────────────────────── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--border-color);
+        }
+
+        .service-card {
+            padding: 50px 40px;
+            border-right: 1px solid var(--border-color);
+            position: relative;
+            transition: background 0.3s;
+        }
+        .service-card:last-child { border-right: none; }
+        .service-card:hover { background: #0f0f0f; }
+
+        .service-number {
+            font-size: 11px; color: var(--accent-color);
+            letter-spacing: 2px; font-weight: 600;
+            margin-bottom: 30px; display: block;
+        }
+
+        .service-icon {
+            width: 44px; height: 44px;
+            border: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 30px;
+            background: #111;
+        }
+
+        .service-card h3 {
+            font-size: 22px; font-weight: 500;
+            margin-bottom: 16px; letter-spacing: -0.3px;
+        }
+
+        .service-card p { font-size: 14px; color: var(--muted-text); line-height: 1.7; }
+
+        .service-tag {
+            display: inline-block; margin-top: 24px;
+            font-size: 11px; color: var(--muted-text);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px; letter-spacing: 1px;
+        }
+
+        /* ── HOW IT WORKS ─────────────────────────────── */
+        .how-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .steps { display: flex; flex-direction: column; gap: 0; }
+
+        .step {
+            display: flex; gap: 30px;
+            padding: 36px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+        }
+        .step:first-child { border-top: 1px solid var(--border-color); }
+
+        .step-num {
+            font-size: 11px; color: var(--accent-color);
+            font-weight: 600; letter-spacing: 2px;
+            min-width: 28px; padding-top: 3px;
+        }
+
+        .step h4 { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+        .step p { font-size: 14px; color: var(--muted-text); line-height: 1.7; }
+
+        .how-visual {
+            position: sticky; top: 120px;
+            background: #0d0d0d;
+            border: 1px solid var(--border-color);
+            padding: 50px;
+            display: flex; flex-direction: column; gap: 30px;
+        }
+
+        .visual-label { font-size: 11px; letter-spacing: 2px; color: var(--muted-text); text-transform: uppercase; }
+
+        .flow-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 18px 20px;
+            background: #111; border: 1px solid var(--border-color);
+            font-size: 14px; font-weight: 500;
+        }
+        .flow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-color); flex-shrink: 0; }
+        .flow-arrow { text-align: center; color: var(--muted-text); font-size: 18px; }
+
+        /* ── STATS ────────────────────────────────────── */
+        .stats-section {
+            background: #0d0d0d;
+            padding: 80px 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            padding: 50px 40px;
+            border-right: 1px solid var(--border-color);
+        }
+        .stat-item:last-child { border-right: none; }
+
+        .stat-num {
+            font-size: 52px; font-weight: 300;
+            letter-spacing: -2px; margin-bottom: 8px;
+            color: white;
+        }
+
+        .stat-num span { color: var(--accent-color); }
+
+        .stat-label { font-size: 13px; color: var(--muted-text); letter-spacing: 0.5px; }
+
+        /* ── SOLUTIONS (USE CASES) ─────────────────────── */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .solution-card {
+            background: var(--bg-color);
+            padding: 48px 44px;
+            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .solution-card:hover { background: #0e0e0e; }
+
+        .solution-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 3px; height: 0;
+            background: var(--accent-color);
+            transition: height 0.4s ease;
+        }
+        .solution-card:hover::before { height: 100%; }
+
+        .solution-card h3 { font-size: 20px; font-weight: 500; margin-bottom: 14px; }
+        .solution-card p { font-size: 14px; color: var(--muted-text); line-height: 1.7; }
+
+        .solution-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .tag {
+            font-size: 11px; padding: 4px 10px;
+            border: 1px solid var(--border-color);
+            color: var(--muted-text); letter-spacing: 1px;
+        }
+
+        /* ── TECH STACK ───────────────────────────────── */
+        .tech-scroll {
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 28px 0;
+            margin-top: 60px;
+        }
+
+        .tech-track {
+            display: flex;
+            gap: 60px;
+            animation: scroll 25s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .tech-item {
+            font-size: 13px; color: var(--muted-text);
+            letter-spacing: 2px; text-transform: uppercase;
+            font-weight: 500; flex-shrink: 0;
+        }
+        .tech-item span { color: var(--accent-color); margin-right: 10px; }
+
+        /* ── TESTIMONIALS ─────────────────────────────── */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial-card {
+            background: var(--bg-color);
+            padding: 44px 40px;
+            transition: background 0.3s;
+        }
+        .testimonial-card:hover { background: #0d0d0d; }
+
+        .quote-mark { font-size: 48px; color: var(--accent-color); line-height: 0.8; margin-bottom: 20px; font-weight: 300; }
+        .testimonial-text { font-size: 15px; color: #d0d0d0; line-height: 1.7; margin-bottom: 30px; }
+        .testimonial-author { display: flex; align-items: center; gap: 14px; }
+        .author-avatar {
+            width: 38px; height: 38px;
+            background: var(--border-color);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 600; color: var(--accent-color);
+        }
+        .author-name { font-size: 14px; font-weight: 600; }
+        .author-role { font-size: 12px; color: var(--muted-text); }
+
+        /* ── CTA SECTION ──────────────────────────────── */
+        .cta-section {
+            background: #0d0d0d;
+            padding: 120px 60px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(85,85,255,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-size: 56px; max-width: 700px;
+            margin: 0 auto 24px; letter-spacing: -1.5px;
+        }
+
+        .cta-section p {
+            color: var(--muted-text); font-size: 16px;
+            max-width: 480px; margin: 0 auto 48px; line-height: 1.7;
+        }
+
+        .cta-group { display: flex; gap: 16px; justify-content: center; align-items: center; }
+
+        /* ── FOOTER ───────────────────────────────────── */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 60px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .footer-brand p { font-size: 14px; color: var(--muted-text); line-height: 1.7; margin-top: 16px; max-width: 280px; }
+
+        .footer-col h5 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted-text); margin-bottom: 20px; }
+
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-col ul li a { color: #888; font-size: 14px; text-decoration: none; transition: color 0.2s; }
+        .footer-col ul li a:hover { color: white; }
+
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .footer-bottom p { font-size: 13px; color: var(--muted-text); }
+
+        .footer-badge {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 12px; color: var(--muted-text);
+        }
+
+        /* ── BOOKING MODAL ───────────────────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(6px);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: #0d0d0d;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 560px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalIn 0.25s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 36px 44px 28px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .modal-header-text {}
+        .modal-header .section-label { margin-bottom: 8px; }
+        .modal-header h3 {
+            font-size: 26px; font-weight: 400;
+            letter-spacing: -0.5px; line-height: 1.2;
+        }
+        .modal-close {
+            background: none; border: none;
+            color: var(--muted-text); font-size: 22px;
+            cursor: pointer; padding: 4px;
+            line-height: 1; transition: color 0.2s;
+            flex-shrink: 0; margin-left: 20px; margin-top: 2px;
+        }
+        .modal-close:hover { color: white; }
+
+        .modal-body { padding: 36px 44px; display: flex; flex-direction: column; gap: 24px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-group label {
+            font-size: 11px; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--muted-text);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: #111;
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 13px 16px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+            width: 100%;
+            border-radius: 0;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-color);
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: #444; }
+
+        .form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+        .form-group select option { background: #111; }
+
+        .form-group textarea { resize: vertical; min-height: 90px; }
+
+        .form-divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 4px 0;
+        }
+
+        .modal-footer {
+            padding: 0 44px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .modal-note {
+            font-size: 12px; color: var(--muted-text); line-height: 1.5;
+        }
+
+        .btn-send {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: white; color: black;
+            padding: 13px 24px;
+            border: none; cursor: pointer;
+            font-size: 14px; font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .btn-send:hover { background: var(--accent-color); color: white; }
+        .btn-send .arrow {
+            background: #333; color: white;
+            padding: 2px 7px; font-size: 11px;
+            transition: background 0.2s;
+        }
+        .btn-send:hover .arrow { background: rgba(255,255,255,0.25); }
+
+        .modal-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 44px;
+            gap: 16px;
+        }
+        .modal-success.show { display: flex; }
+        .success-icon {
+            width: 52px; height: 52px;
+            border: 1px solid #00e676;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #00e676; font-size: 22px; margin-bottom: 8px;
+        }
+        .modal-success h4 { font-size: 22px; font-weight: 400; letter-spacing: -0.3px; }
+        .modal-success p { font-size: 14px; color: var(--muted-text); max-width: 320px; line-height: 1.7; }
+
+        /* ── MOBILE ───────────────────────────────────── */
+        @media (max-width: 600px) {
+            .modal-header, .modal-body, .modal-footer { padding-left: 24px; padding-right: 24px; }
+            .form-row { grid-template-columns: 1fr; }
+            .modal-footer { flex-direction: column; align-items: stretch; }
+            .btn-send { justify-content: center; }
+        }
+
+        @media (max-width: 900px) {
+            h1 { font-size: 40px; }
+            h2 { font-size: 34px; }
+            nav { padding: 30px; }
+            .nav-links, .nav-right { display: none; }
+            .hero { padding: 0 30px; }
+            section { padding: 80px 30px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { border-right: none; border-bottom: 1px solid var(--border-color); }
+            .how-layout { grid-template-columns: 1fr; gap: 60px; }
+            .how-visual { position: static; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item { border-right: none; border-bottom: 1px solid var(--border-color); }
+            .solutions-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .logo-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr; gap: 40px; }
+            .cta-section h2 { font-size: 38px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">FORTIS LABS</div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#how">Process</a>
+            <a href="#testimonials">Clients</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-right">
+            <a href="#contact" class="cta-nav" data-book>Book a call</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="sub-tag">Robust AI Workflow Automation</span>
+            <h1>Automate the complex.<br>Scale operations by 10x.</h1>
+            <div class="partner-row">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5l-3.5-3.5 1.41-1.41L11 13.67l4.59-4.59L17 10.5 11 16.5z"/></svg>
+                Enterprise AI Partner
+            </div>
+            <p class="description">
+                Fortis Labs builds intelligent automation solutions that streamline, simplify, and accelerate complex workflows — so your team can focus on what moves the needle.
+            </p>
+            <div class="hero-ctas">
+                <a href="#" class="cta-main" data-book>Start automating <span class="arrow">→</span></a>
+                <a href="#solutions" class="cta-secondary">See our solutions</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST -->
+    <section class="trust-section" style="padding:0;">
+        <div class="trust-label" style="padding-top:40px;">Trusted by 100+ tech market leaders</div>
+        <div class="logo-grid">
+            <div class="grid-item"><div class="client-logo">TUTLO</div></div>
+            <div class="grid-item"><div class="client-logo">JACE</div></div>
+            <div class="grid-item"><div class="client-logo">GENTRACE</div></div>
+            <div class="grid-item"><div class="client-logo">ADAPT</div></div>
+            <div class="grid-item"><div class="client-logo">INVEN</div></div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-section" style="padding:80px 60px; border-top: 1px solid var(--border-color);">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-num">70<span>%</span></div>
+                <div class="stat-label">Average reduction in manual work</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">100<span>+</span></div>
+                <div class="stat-label">Organizations automated</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">3<span>×</span></div>
+                <div class="stat-label">Faster workflow completion</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">98<span>%</span></div>
+                <div class="stat-label">Client retention rate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <span class="section-label">What we do</span>
+        <h2>End-to-end automation,<br>built around your stack</h2>
+        <p class="section-desc">From strategy to deployment, we design and build AI-powered systems that integrate seamlessly with your existing workflows and tools.</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-number">01</span>
+                <div class="service-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5555ff" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Workflow Automation</h3>
+                <p>We map your most time-intensive processes and build intelligent pipelines that execute them autonomously — reducing errors and freeing up your team.</p>
+                <span class="service-tag">PROCESS DESIGN · INTEGRATION</span>
+            </div>
+            <div class="service-card">
+                <span class="service-number">02</span>
+                <div class="service-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5555ff" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                </div>
+                <h3>AI Agent Development</h3>
+                <p>Custom AI agents that reason, act, and adapt — handling everything from data extraction and document processing to multi-step decision workflows.</p>
+                <span class="service-tag">LLM · AGENTS · RAG</span>
+            </div>
+            <div class="service-card">
+                <span class="service-number">03</span>
+                <div class="service-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5555ff" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </div>
+                <h3>Systems Integration</h3>
+                <p>Seamlessly connect your CRMs, ERPs, databases, and third-party tools into a unified automation layer — no more data silos or manual handoffs.</p>
+                <span class="service-tag">API · ETL · WEBHOOKS</span>
+            </div>
+            <div class="service-card">
+                <span class="service-number">04</span>
+                <div class="service-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5555ff" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>Intelligent Document Processing</h3>
+                <p>Extract, classify, and route information from unstructured documents — invoices, contracts, reports — with AI-powered accuracy at scale.</p>
+                <span class="service-tag">OCR · NLP · EXTRACTION</span>
+            </div>
+            <div class="service-card">
+                <span class="service-number">05</span>
+                <div class="service-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5555ff" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3>Analytics & Monitoring</h3>
+                <p>Real-time dashboards and observability tooling so you always know how your automations are performing — and get alerted before issues arise.</p>
+                <span class="service-tag">DASHBOARDS · ALERTS · LOGS</span>
+            </div>
+            <div class="service-card">
+                <span class="service-number">06</span>
+                <div class="service-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5555ff" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Automation Strategy & Audit</h3>
+                <p>Not sure where to start? We audit your operations, identify the highest-ROI automation opportunities, and build a roadmap tailored to your goals.</p>
+                <span class="service-tag">CONSULTING · ROADMAP · AUDIT</span>
+            </div>
+        </div>
+
+        <div class="tech-scroll">
+            <div class="tech-track">
+                <span class="tech-item"><span>●</span> OpenAI</span>
+                <span class="tech-item"><span>●</span> Anthropic</span>
+                <span class="tech-item"><span>●</span> LangChain</span>
+                <span class="tech-item"><span>●</span> Zapier</span>
+                <span class="tech-item"><span>●</span> Make.com</span>
+                <span class="tech-item"><span>●</span> n8n</span>
+                <span class="tech-item"><span>●</span> Salesforce</span>
+                <span class="tech-item"><span>●</span> HubSpot</span>
+                <span class="tech-item"><span>●</span> Notion API</span>
+                <span class="tech-item"><span>●</span> Airtable</span>
+                <span class="tech-item"><span>●</span> AWS Lambda</span>
+                <span class="tech-item"><span>●</span> Supabase</span>
+                <!-- duplicate for seamless loop -->
+                <span class="tech-item"><span>●</span> OpenAI</span>
+                <span class="tech-item"><span>●</span> Anthropic</span>
+                <span class="tech-item"><span>●</span> LangChain</span>
+                <span class="tech-item"><span>●</span> Zapier</span>
+                <span class="tech-item"><span>●</span> Make.com</span>
+                <span class="tech-item"><span>●</span> n8n</span>
+                <span class="tech-item"><span>●</span> Salesforce</span>
+                <span class="tech-item"><span>●</span> HubSpot</span>
+                <span class="tech-item"><span>●</span> Notion API</span>
+                <span class="tech-item"><span>●</span> Airtable</span>
+                <span class="tech-item"><span>●</span> AWS Lambda</span>
+                <span class="tech-item"><span>●</span> Supabase</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTIONS / USE CASES -->
+    <section id="solutions">
+        <span class="section-label">Solutions</span>
+        <h2>Built for complex,<br>real-world operations</h2>
+        <p class="section-desc">We've deployed automation solutions across industries — from fast-growing startups to enterprise teams managing thousands of daily operations.</p>
+
+        <div class="solutions-grid">
+            <div class="solution-card">
+                <h3>Sales & Revenue Operations</h3>
+                <p>Automate lead enrichment, CRM updates, follow-up sequences, and pipeline reporting — so your sales team spends time selling, not on admin.</p>
+                <div class="solution-tags">
+                    <span class="tag">CRM SYNC</span>
+                    <span class="tag">LEAD SCORING</span>
+                    <span class="tag">AUTO OUTREACH</span>
+                </div>
+            </div>
+            <div class="solution-card">
+                <h3>Finance & Accounting Workflows</h3>
+                <p>Streamline invoice processing, expense approvals, reconciliation, and financial reporting with AI that reads documents and routes actions automatically.</p>
+                <div class="solution-tags">
+                    <span class="tag">INVOICE AI</span>
+                    <span class="tag">APPROVALS</span>
+                    <span class="tag">RECONCILIATION</span>
+                </div>
+            </div>
+            <div class="solution-card">
+                <h3>HR & Onboarding Automation</h3>
+                <p>From job application screening to onboarding task orchestration, we help HR teams deliver consistent, fast experiences at any scale.</p>
+                <div class="solution-tags">
+                    <span class="tag">CV SCREENING</span>
+                    <span class="tag">ONBOARDING</span>
+                    <span class="tag">HR WORKFLOWS</span>
+                </div>
+            </div>
+            <div class="solution-card">
+                <h3>Customer Support Intelligence</h3>
+                <p>Deploy AI agents that handle Tier-1 support, triage incoming tickets, draft responses, and escalate only what needs a human — 24/7.</p>
+                <div class="solution-tags">
+                    <span class="tag">AI AGENTS</span>
+                    <span class="tag">TICKET TRIAGE</span>
+                    <span class="tag">RESPONSE DRAFTING</span>
+                </div>
+            </div>
+            <div class="solution-card">
+                <h3>Data & Reporting Pipelines</h3>
+                <p>Automate data ingestion, transformation, and delivery across your stack — from raw APIs to polished executive dashboards, on a schedule.</p>
+                <div class="solution-tags">
+                    <span class="tag">ETL</span>
+                    <span class="tag">SCHEDULED REPORTS</span>
+                    <span class="tag">DATA SYNC</span>
+                </div>
+            </div>
+            <div class="solution-card">
+                <h3>Internal Tooling & Portals</h3>
+                <p>Custom internal apps and admin dashboards that connect your team directly to the automation layer — no code, no friction, just results.</p>
+                <div class="solution-tags">
+                    <span class="tag">ADMIN TOOLS</span>
+                    <span class="tag">INTERNAL APPS</span>
+                    <span class="tag">PORTALS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+        <div class="how-layout">
+            <div>
+                <span class="section-label">Our process</span>
+                <h2>From discovery<br>to deployment</h2>
+                <p class="section-desc">We move fast but precisely — taking your workflows from manual to fully automated in weeks, not months.</p>
+
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-num">01</span>
+                        <div>
+                            <h4>Discovery & Audit</h4>
+                            <p>We map your current workflows, identify bottlenecks, and calculate the automation ROI for each process. You leave with a clear roadmap even if you don't proceed.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">02</span>
+                        <div>
+                            <h4>Solution Design</h4>
+                            <p>Our team architects the automation logic, selects the right tools and models, and designs the integration points — tailored to your existing stack.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">03</span>
+                        <div>
+                            <h4>Build & Integrate</h4>
+                            <p>We build the automation systems, connect all the services, and run comprehensive testing with real data before anything goes live.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">04</span>
+                        <div>
+                            <h4>Launch & Handover</h4>
+                            <p>Systems are deployed to production with full monitoring in place. We provide training, documentation, and a post-launch support period.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">05</span>
+                        <div>
+                            <h4>Ongoing Optimisation</h4>
+                            <p>As your business scales, we iterate on automations, add new triggers, and expand coverage — so your systems grow with you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="how-visual">
+                <span class="visual-label">Automation Flow</span>
+                <div class="flow-item"><span class="flow-dot"></span> Trigger: New form submission</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item"><span class="flow-dot" style="background:#888;"></span> Enrich data via AI agent</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item"><span class="flow-dot" style="background:#888;"></span> Update CRM record</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item"><span class="flow-dot" style="background:#888;"></span> Score & route to sales rep</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item"><span class="flow-dot" style="background:#888;"></span> Send personalised email</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item"><span class="flow-dot" style="background:#888;"></span> Log to Slack + dashboard</div>
+                <div style="margin-top:10px; padding:18px 20px; border:1px solid #5555ff20; background:#5555ff08; font-size:13px; color:#5555ff;">
+                    ✓ Completed in 1.2s &nbsp;·&nbsp; 0 manual steps
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+        <span class="section-label">Client stories</span>
+        <h2>What our clients say</h2>
+        <p class="section-desc">We measure success by the hours saved, errors eliminated, and revenue unlocked for the teams we work with.</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">Fortis Labs automated our entire onboarding pipeline. What used to take our ops team 3 days now runs in under 10 minutes. The ROI was visible within the first week.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SK</div>
+                    <div>
+                        <div class="author-name">Sarah K.</div>
+                        <div class="author-role">VP Operations, Tutlo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">Their AI agents handle our Tier-1 support entirely. Ticket resolution time dropped by 60% and our team finally has bandwidth to focus on complex issues that actually need human judgment.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MR</div>
+                    <div>
+                        <div class="author-name">Marcus R.</div>
+                        <div class="author-role">Head of CX, Gentrace</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">We came in sceptical about AI automations. Fortis did a thorough audit, showed us exactly where we were losing time, and built solutions that genuinely changed how we operate.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AL</div>
+                    <div>
+                        <div class="author-name">Amara L.</div>
+                        <div class="author-role">CEO, Adapt AI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta-section" style="padding:120px 60px;">
+        <span class="section-label" style="display:block; margin-bottom:20px;">Get started</span>
+        <h2>Ready to automate<br>your operations?</h2>
+        <p>Book a free 30-minute discovery call. We'll identify your highest-impact automation opportunities and give you a clear picture of what's possible.</p>
+        <div class="cta-group">
+            <a href="#" class="cta-main" data-book>Book a discovery call <span class="arrow">→</span></a>
+            <a href="#services" class="cta-secondary">Explore services</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo" style="font-size:18px;">FORTIS LABS</div>
+                <p>AI automation solutions that streamline, simplify, and accelerate complex workflows for ambitious organisations.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Services</h5>
+                <ul>
+                    <li><a href="#">Workflow Automation</a></li>
+                    <li><a href="#">AI Agent Development</a></li>
+                    <li><a href="#">Systems Integration</a></li>
+                    <li><a href="#">Document Processing</a></li>
+                    <li><a href="#">Automation Audit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Solutions</h5>
+                <ul>
+                    <li><a href="#">Sales Ops</a></li>
+                    <li><a href="#">Finance Workflows</a></li>
+                    <li><a href="#">HR Automation</a></li>
+                    <li><a href="#">Support Intelligence</a></li>
+                    <li><a href="#">Data Pipelines</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Fortis Labs. All rights reserved.</p>
+            <div class="footer-badge">
+                <span class="dot"></span>
+                Available for new projects
+            </div>
+            </div>
+    </footer>
+
+    <!-- BOOKING MODAL -->
+    <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-header-text">
+                    <span class="section-label">Book a discovery call</span>
+                    <h3 id="modalTitle">Let's find a time<br>that works for you</h3>
+                </div>
+                <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+            </div>
+
+            <div id="modalForm">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First name</label>
+                            <input type="text" id="firstName" placeholder="Jane" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last name</label>
+                            <input type="text" id="lastName" placeholder="Smith" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your email</label>
+                        <input type="email" id="email" placeholder="jane@company.com" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone number</label>
+                        <input type="tel" id="phone" placeholder="+1 (555) 000-0000" />
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" placeholder="Your company name" />
+                    </div>
+                    <hr class="form-divider" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prefDate">Preferred date</label>
+                            <input type="date" id="prefDate" />
+                        </div>
+                        <div class="form-group">
+                            <label for="prefTime">Preferred time</label>
+                            <select id="prefTime">
+                                <option value="" disabled selected>Select a slot</option>
+                                <option>09:00 – 09:30</option>
+                                <option>09:30 – 10:00</option>
+                                <option>10:00 – 10:30</option>
+                                <option>10:30 – 11:00</option>
+                                <option>11:00 – 11:30</option>
+                                <option>11:30 – 12:00</option>
+                                <option>13:00 – 13:30</option>
+                                <option>13:30 – 14:00</option>
+                                <option>14:00 – 14:30</option>
+                                <option>14:30 – 15:00</option>
+                                <option>15:00 – 15:30</option>
+                                <option>15:30 – 16:00</option>
+                                <option>16:00 – 16:30</option>
+                                <option>16:30 – 17:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="altDate">Alternative date &amp; time <span style="color:#444;font-weight:400;letter-spacing:0">(optional)</span></label>
+                        <input type="text" id="altDate" placeholder="e.g. Friday 14 March, afternoon" />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">What would you like to automate? <span style="color:#444;font-weight:400;letter-spacing:0">(optional)</span></label>
+                        <textarea id="message" placeholder="Brief description of your workflows or goals..."></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <p class="modal-note">We'll confirm your slot within one business day.<br>The call is free and lasts 30 minutes.</p>
+                    <button class="btn-send" id="sendBtn">Send request <span class="arrow">&#8594;</span></button>
+                </div>
+            </div>
+
+            <div class="modal-success" id="modalSuccess">
+                <div class="success-icon">&#10003;</div>
+                <h4>Request sent!</h4>
+                <p>We've received your booking request and will confirm your slot within one business day. Check your inbox for a confirmation.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal    = document.getElementById('bookingModal');
+        const closeBtn = document.getElementById('modalClose');
+        const sendBtn  = document.getElementById('sendBtn');
+
+        function openModal() {
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+        closeBtn.addEventListener('click', closeModal);
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+        document.querySelectorAll('[data-book]').forEach(function(btn) {
+            btn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+        });
+
+        var dateInput = document.getElementById('prefDate');
+        dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+
+        sendBtn.addEventListener('click', function() {
+            var firstName = document.getElementById('firstName').value.trim();
+            var lastName  = document.getElementById('lastName').value.trim();
+            var email     = document.getElementById('email').value.trim();
+            var phone     = document.getElementById('phone').value.trim();
+            var company   = document.getElementById('company').value.trim();
+            var prefDate  = document.getElementById('prefDate').value;
+            var prefTime  = document.getElementById('prefTime').value;
+            var altDate   = document.getElementById('altDate').value.trim();
+            var message   = document.getElementById('message').value.trim();
+
+            if (!firstName || !lastName || !email || !phone || !prefDate || !prefTime) {
+                var missing = [];
+                if (!firstName || !lastName) missing.push('full name');
+                if (!email)    missing.push('email');
+                if (!phone)    missing.push('phone number');
+                if (!prefDate) missing.push('preferred date');
+                if (!prefTime) missing.push('preferred time');
+                alert('Please fill in: ' + missing.join(', ') + '.');
+                return;
+            }
+
+            var formattedDate = new Date(prefDate + 'T12:00:00').toLocaleDateString('en-GB', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+
+            var subject = encodeURIComponent('Discovery Call Request — ' + firstName + ' ' + lastName);
+            var bodyText = 'New Discovery Call Request\n'
+                + '===========================\n\n'
+                + 'Name:     ' + firstName + ' ' + lastName + '\n'
+                + 'Email:    ' + email + '\n'
+                + 'Phone:    ' + phone + '\n'
+                + 'Company:  ' + (company || 'Not provided') + '\n\n'
+                + 'PREFERRED SLOT\n'
+                + '--------------\n'
+                + 'Date:     ' + formattedDate + '\n'
+                + 'Time:     ' + prefTime + ' (client local time)\n'
+                + (altDate ? 'Alternative: ' + altDate + '\n' : '')
+                + '\nABOUT THEIR NEEDS\n'
+                + '-----------------\n'
+                + (message || 'No details provided.') + '\n\n'
+                + '---\nSent via the Fortis Labs booking form.';
+
+            window.location.href = 'mailto:contact@fortislabs.xyz?subject=' + subject + '&body=' + encodeURIComponent(bodyText);
+
+            setTimeout(function() {
+                document.getElementById('modalForm').style.display = 'none';
+                document.getElementById('modalSuccess').classList.add('show');
+            }, 700);
+        });
+    </script>
+
+</body>
+</html>
