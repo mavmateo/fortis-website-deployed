@@ -487,6 +487,198 @@
             font-size: 12px; color: var(--muted-text);
         }
 
+        /* ── BLOG ─────────────────────────────────────── */
+        .blog-section { padding: 120px 60px; border-top: 1px solid var(--border-color); }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--border-color);
+            margin-top: 0;
+        }
+
+        .blog-card {
+            padding: 44px 40px;
+            border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column;
+            transition: background 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .blog-card:last-child { border-right: none; }
+        .blog-card:hover { background: #0f0f0f; }
+        .blog-card::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent-color);
+            transition: width 0.4s ease;
+        }
+        .blog-card:hover::after { width: 100%; }
+
+        .blog-tag {
+            font-size: 10px; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--accent-color);
+            font-weight: 600; margin-bottom: 20px;
+        }
+
+        .blog-card h3 {
+            font-size: 19px; font-weight: 500;
+            line-height: 1.35; letter-spacing: -0.3px;
+            margin-bottom: 14px; flex-grow: 1;
+        }
+
+        .blog-card p {
+            font-size: 13px; color: var(--muted-text);
+            line-height: 1.7; margin-bottom: 28px;
+        }
+
+        .blog-meta {
+            display: flex; align-items: center;
+            justify-content: space-between;
+            font-size: 12px; color: var(--muted-text);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px; margin-top: auto;
+        }
+
+        .blog-read-link {
+            font-size: 12px; color: var(--accent-color);
+            font-weight: 600; letter-spacing: 1px;
+            text-transform: uppercase; display: flex;
+            align-items: center; gap: 6px;
+        }
+
+        .blog-placeholder {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .blog-placeholder .blog-tag { color: var(--muted-text); }
+        .blog-placeholder h3 { color: var(--muted-text); }
+
+        /* ── POST MODAL ───────────────────────────────── */
+        .post-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(8px);
+            z-index: 998;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        .post-overlay.open { display: flex; }
+
+        .post-modal {
+            background: #0d0d0d;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 720px;
+            animation: modalIn 0.25s ease;
+            margin: auto;
+        }
+
+        .post-modal-header {
+            padding: 48px 56px 36px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .post-close {
+            position: absolute; top: 28px; right: 32px;
+            background: none; border: none;
+            color: var(--muted-text); font-size: 22px;
+            cursor: pointer; padding: 4px;
+            line-height: 1; transition: color 0.2s;
+        }
+        .post-close:hover { color: white; }
+
+        .post-category {
+            font-size: 10px; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--accent-color);
+            font-weight: 600; margin-bottom: 16px; display: block;
+        }
+
+        .post-modal-header h2 {
+            font-size: 34px; font-weight: 400;
+            letter-spacing: -0.8px; line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .post-subtitle {
+            font-size: 16px; color: var(--muted-text);
+            line-height: 1.6; margin-bottom: 24px;
+        }
+
+        .post-meta-row {
+            display: flex; align-items: center; gap: 20px;
+            font-size: 12px; color: var(--muted-text);
+        }
+        .post-meta-row span { display: flex; align-items: center; gap: 6px; }
+
+        .post-body {
+            padding: 48px 56px 56px;
+            font-size: 15px; line-height: 1.85;
+            color: #ccc;
+        }
+
+        .post-body p { margin-bottom: 22px; }
+
+        .post-body h3 {
+            font-size: 20px; font-weight: 500;
+            color: white; margin: 36px 0 14px;
+            letter-spacing: -0.3px;
+        }
+
+        .post-body ul {
+            list-style: none; margin: 0 0 22px 0; padding: 0;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+
+        .post-body ul li {
+            padding: 12px 16px;
+            background: #111; border: 1px solid var(--border-color);
+            border-left: 2px solid var(--accent-color);
+            font-size: 14px; color: #bbb;
+        }
+
+        .post-body .callout {
+            background: #5555ff0d;
+            border: 1px solid #5555ff30;
+            padding: 20px 24px;
+            margin: 28px 0;
+            font-size: 14px; color: #bbb; line-height: 1.7;
+        }
+
+        .post-body .check-list { margin: 0 0 22px 0; }
+        .post-body .check-list li {
+            background: none; border: none;
+            border-left: none;
+            padding: 6px 0;
+            color: #bbb; font-size: 14px;
+        }
+        .post-body .check-list li::before {
+            content: '✅ ';
+        }
+
+        .post-body .post-cta {
+            margin-top: 40px;
+            padding: 32px 36px;
+            background: #111;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .post-body .post-cta p {
+            color: var(--muted-text); font-size: 14px; margin-bottom: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .post-modal-header, .post-body { padding-left: 28px; padding-right: 28px; }
+            .post-modal-header h2 { font-size: 26px; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .blog-card { border-right: none; border-bottom: 1px solid var(--border-color); }
+        }
+
         /* ── BOOKING MODAL ───────────────────────────── */
         .modal-overlay {
             display: none;
@@ -685,8 +877,8 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-            <span class="sub-tag">Robust AI Workflow Automation</span>
-            <h1>Automate the complex.<br>Scale operations by 10x.</h1>
+            <span class="sub-tag">AI Automation Agency</span>
+            <h1>Automate the complex.<br>Scale what matters.</h1>
             <div class="partner-row">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5l-3.5-3.5 1.41-1.41L11 13.67l4.59-4.59L17 10.5 11 16.5z"/></svg>
                 Enterprise AI Partner
@@ -1003,6 +1195,120 @@
         </div>
     </section>
 
+    <!-- BLOG -->
+    <section id="blog" class="blog-section">
+        <span class="section-label">Insights</span>
+        <h2>From the Fortis Labs blog</h2>
+        <p class="section-desc">Thinking on AI, automation, and what it means for the businesses building the future.</p>
+
+        <div class="blog-grid">
+            <!-- Live post -->
+            <div class="blog-card" onclick="openPost()">
+                <span class="blog-tag">AI &amp; Legal Tech</span>
+                <h3>How AI Is Making Legal Services Affordable for Small Businesses</h3>
+                <p>Why structured legal support is no longer just for corporations — and what the AI shift means for entrepreneurs in emerging markets.</p>
+                <div class="blog-meta">
+                    <span>June 2025 &nbsp;·&nbsp; 4 min read</span>
+                    <span class="blog-read-link">Read →</span>
+                </div>
+            </div>
+            <!-- Placeholder 2 -->
+            <div class="blog-card blog-placeholder">
+                <span class="blog-tag">Automation</span>
+                <h3>5 Workflows Every Growing Business Should Automate First</h3>
+                <p>The highest-ROI processes to hand off to AI — ranked by impact and ease of implementation.</p>
+                <div class="blog-meta">
+                    <span>Coming soon</span>
+                    <span class="blog-read-link" style="opacity:0.3">Read →</span>
+                </div>
+            </div>
+            <!-- Placeholder 3 -->
+            <div class="blog-card blog-placeholder">
+                <span class="blog-tag">AI Agents</span>
+                <h3>What Makes a Good AI Agent? A Framework for Evaluating Reliability</h3>
+                <p>Not all agents are built the same. Here's how we think about designing agents that actually hold up in production.</p>
+                <div class="blog-meta">
+                    <span>Coming soon</span>
+                    <span class="blog-read-link" style="opacity:0.3">Read →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POST READER MODAL -->
+    <div class="post-overlay" id="postOverlay">
+        <div class="post-modal">
+            <div class="post-modal-header">
+                <button class="post-close" onclick="closePost()">&times;</button>
+                <span class="post-category">AI &amp; Legal Tech</span>
+                <h2>How AI Is Making Legal Services Affordable for Small Businesses</h2>
+                <p class="post-subtitle">Why structured legal support is no longer just for corporations</p>
+                <div class="post-meta-row">
+                    <span>June 2025</span>
+                    <span>·</span>
+                    <span>4 min read</span>
+                </div>
+            </div>
+            <div class="post-body">
+
+                <p>For decades, legal advisory was reserved for large corporations with deep pockets. In Ghana, companies paid monthly retainers between GHS 4,000 and GHS 20,000 — a cost structure that priced out startups and small businesses entirely.</p>
+
+                <p>The traditional model was time-driven. And time is expensive.</p>
+
+                <ul>
+                    <li>Legal research was slow</li>
+                    <li>Regulatory filings were manual</li>
+                    <li>Contract drafting required multiple iterations</li>
+                    <li>Document review consumed billable hours</li>
+                </ul>
+
+                <p>The result? Many small businesses relied on informal agents or generic templates. Compliance became reactive rather than preventive — leading to poor structuring, weak contracts, regulatory breaches, and avoidable disputes.</p>
+
+                <h3>Enter Artificial Intelligence</h3>
+
+                <p>AI is reshaping the legal landscape in ways that were unthinkable five years ago. The shift isn't subtle — it's structural.</p>
+
+                <ul>
+                    <li>Legal research is faster — what took days now takes minutes</li>
+                    <li>Drafting workflows are streamlined — contracts can be generated and refined quickly</li>
+                    <li>Document review is more efficient — AI flags issues before they become problems</li>
+                    <li>Compliance tracking is systematized — stay ahead of regulations</li>
+                    <li>Repetitive processes are automated — lawyers focus on high-value advisory</li>
+                </ul>
+
+                <h3>This Doesn't Replace Lawyers — It Amplifies Them</h3>
+
+                <p>When efficiency improves, cost structures shift. A lawyer who previously had limited capacity can now manage a broader client base without lowering standards.</p>
+
+                <div class="callout">
+                    Think about it: A lawyer can now support 20 small businesses at GHS 1,000 per month. That's accessible for entrepreneurs and sustainable for the lawyer. AI makes it scalable.
+                </div>
+
+                <h3>The Implications Are Clear</h3>
+
+                <ul class="check-list">
+                    <li>Preventive legal support becomes affordable</li>
+                    <li>Contracts are reviewed before disputes arise</li>
+                    <li>Compliance is handled from day one</li>
+                    <li>Risk is managed early</li>
+                    <li>Legal services become continuous rather than emergency-based</li>
+                </ul>
+
+                <h3>The Bottom Line</h3>
+
+                <p>This isn't about eliminating lawyers. It's about expanding access to structured legal protection.</p>
+
+                <p>For small businesses, legal guidance is no longer a luxury — it's operational infrastructure. The entrepreneurs who recognise this shift early will build stronger, more resilient businesses.</p>
+
+                <div class="post-cta">
+                    <p>Ready to get affordable legal support for your business? Fortis is here to help.</p>
+                    <a href="#" class="cta-main" data-book style="display:inline-flex;">Book a discovery call <span class="arrow">→</span></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- CTA -->
     <section id="contact" class="cta-section" style="padding:120px 60px;">
         <span class="section-label" style="display:block; margin-bottom:20px;">Get started</span>
@@ -1046,7 +1352,7 @@
                 <ul>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Case Studies</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="#blog">Blog</a></li>
                     <li><a href="#">Careers</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
@@ -1148,6 +1454,20 @@
     </div>
 
     <script>
+        function openPost() {
+            document.getElementById('postOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePost() {
+            document.getElementById('postOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('postOverlay').addEventListener('click', function(e) {
+                if (e.target === this) closePost();
+            });
+        });
+
         const modal    = document.getElementById('bookingModal');
         const closeBtn = document.getElementById('modalClose');
         const sendBtn  = document.getElementById('sendBtn');
