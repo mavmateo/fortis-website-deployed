@@ -870,7 +870,7 @@
             <a href="#contact">Contact</a>
         </div>
         <div class="nav-right">
-            <a href="#contact" class="cta-nav" data-book>Book a demo</a>
+            <a href="#contact" class="cta-nav" data-book>Book a call</a>
         </div>
     </nav>
 
@@ -1503,6 +1503,7 @@
             var altDate   = document.getElementById('altDate').value.trim();
             var message   = document.getElementById('message').value.trim();
 
+            // Validation
             if (!firstName || !lastName || !email || !phone || !prefDate || !prefTime) {
                 var missing = [];
                 if (!firstName || !lastName) missing.push('full name');
@@ -1518,8 +1519,12 @@
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
             });
 
-            var subject = encodeURIComponent('Discovery Call Request — ' + firstName + ' ' + lastName);
-            var bodyText = 'New Discovery Call Request\n'
+            // Disable button and show loading state
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Sending…';
+
+            // Build message body for the email
+            var emailBody = 'New Discovery Call Request\n'
                 + '===========================\n\n'
                 + 'Name:     ' + firstName + ' ' + lastName + '\n'
                 + 'Email:    ' + email + '\n'
@@ -1535,12 +1540,42 @@
                 + (message || 'No details provided.') + '\n\n'
                 + '---\nSent via the Fortis Labs booking form.';
 
-            window.location.href = 'mailto:contact@fortislabs.xyz?subject=' + subject + '&body=' + encodeURIComponent(bodyText);
-
-            setTimeout(function() {
-                document.getElementById('modalForm').style.display = 'none';
-                document.getElementById('modalSuccess').classList.add('show');
-            }, 700);
+            // Send via Web3Forms (free, no backend needed)
+            // IMPORTANT: Replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    access_key: 'b3f92c43-f03b-4082-8b6d-a56e92c3fe95',
+                    subject: 'Discovery Call Request — ' + firstName + ' ' + lastName,
+                    from_name: firstName + ' ' + lastName,
+                    replyto: email,
+                    to: 'contact@fortislabs.xyz',
+                    message: emailBody,
+                    // Extra structured fields shown in the email
+                    'Phone': phone,
+                    'Company': company || 'Not provided',
+                    'Preferred Date': formattedDate,
+                    'Preferred Time': prefTime,
+                    'Alternative Slot': altDate || 'None provided'
+                })
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    document.getElementById('modalForm').style.display = 'none';
+                    document.getElementById('modalSuccess').classList.add('show');
+                } else {
+                    sendBtn.disabled = false;
+                    sendBtn.innerHTML = 'Send request <span class="arrow">&#8594;</span>';
+                    alert('Something went wrong. Please try again or email us directly at contact@fortislabs.xyz');
+                }
+            })
+            .catch(function() {
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = 'Send request <span class="arrow">&#8594;</span>';
+                alert('Network error. Please check your connection and try again, or email us at contact@fortislabs.xyz');
+            });
         });
     </script>
 
